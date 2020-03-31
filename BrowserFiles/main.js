@@ -11,3 +11,9 @@ for (let i = 1; i <= 100; i++) {
     context.lineTo(Math.random() * width, Math.random() * height);
     context.stroke();
 }
+
+// let v1 = new Vector(10, 5);
+// console.log(v1.getX());
+// console.log(v1.getY());
+// console.log(v1.getAngle());
+// console.log(v1.getLength());
