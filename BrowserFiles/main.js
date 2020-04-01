@@ -17,3 +17,11 @@ for (let i = 1; i <= 100; i++) {
 // console.log(v1.getY());
 // console.log(v1.getAngle());
 // console.log(v1.getLength());
+
+const update = () => {
+    // Animation goes here
+
+    requestAnimationFrame(update);
+}
+
+update();
