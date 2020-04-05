@@ -1,27 +1,41 @@
 class Particle {
-    constructor(x, y, speed, direction, gravity, mass) {
-        this.position = new Vector(x, y);
-        this.velocity = new Vector(0, 0);
+    constructor(x, y, speed, direction, gravity) {
+        this.x = x;
+        this.y = y;
+        this.vx = Math.cos(direction) * speed;
+        this.vy = Math.sin(direction) * speed;
 
-        this.velocity.setLength(speed);
-        this.velocity.setAngle(direction);
-        this.gravity = new Vector(0, gravity || 0);
+        this.gravity = grav || 0;
+
         this.mass = mass || 1;
+        this.radius = 2;
+        this.bounce = -1;
+        this.friction = 1;
     }
 
     update = () => {
-        this.velocity.addTo(this.gravity);
-        this.position.addTo(this.velocity);
+        // this.velocity.multiplyBy(this.friction);
+        // this.velocity.addTo(this.gravity);
+        // this.position.addTo(this.velocity);
+        this.vx *= this.friction;
+        this.vy *= this.friction;
+
+        this.vy += this.gravity;
+
+        this.x += this.vx;
+        this.y += this.vy;
     }
 
-    accelerate = (accelration) => {
-        this.velocity.addTo(accelration);
+    accelerate = (ax, ay) => {
+        // this.velocity.addTo(accelration);
+        this.vx += ax;
+        this.vy += ay;
     }
 
     angleTo = (p2) => {
         return Math.atan2(
-            p2.position.getY() - this.position.getY(),
-            p2.position.getX() - this.position.getX()
+            p2.y - this.y,
+            p2.x - this.x
         );
     }
 
@@ -33,12 +47,44 @@ class Particle {
     }
 
     gravitateTo = p2 => {
-        let grav = new Vector(0, 0);
-        let dist = this.distanceTo(p2);
+        // let grav = new Vector(0, 0);
+        // let dist = this.distanceTo(p2);
 
-        grav.setLength(p2.mass / (dist * dist));
-        grav.setAngle(this.angleTo(p2));
+        // grav.setLength(p2.mass / (dist * dist));
+        // grav.setAngle(this.angleTo(p2));
 
-        this.velocity.addTo(grav);
+        // this.velocity.addTo(grav);
+
+        let dx = p2.x - this.x,
+            dy = p2.y - this.y,
+            distSQ = dx * dx + dy * dy;
+            dist = Math.sqrt(distSQ);
+            force = p2.mass / distSQ,
+            ax = dx / dist * force,
+            ay = dy / dist * force;
+
+        this.vy += ay;
+        this.vx += ax;
+
+    }
+
+    getSpeed = () => {
+        return Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+    }
+
+    setSpeed = speed => {
+        let heading = this.getHeading();
+        this.vx = Math.cos(heading) * speed;
+        this.vy = Math.sin(heading) * speed;
+    }
+
+    getHeading = () => {
+        return Math.atan2(this.vy, this.vx);
+    }
+
+    setHeading = heading => {
+        let speed = this.getSpeed();
+        this.vx = Math.cos(heading) * speed;
+        this.vy = Math.sin(heading) * speed;
     }
 }

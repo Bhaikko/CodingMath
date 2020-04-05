@@ -4,6 +4,7 @@ let width = canvas.width = window.innerWidth;
 let height = canvas.height = window.innerHeight;
 
 let ship = new Particle(width / 2, height / 2, 0, 0);
+// ship.friction = 0.98;
 let thrust = new Vector(0, 0);
 let angle = 0;
 

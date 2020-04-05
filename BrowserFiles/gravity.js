@@ -29,4 +29,4 @@ const update = () => {
     requestAnimationFrame(update);
 }
 
-update();
+update();              
