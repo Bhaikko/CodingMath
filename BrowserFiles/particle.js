@@ -1,5 +1,5 @@
 class Particle {
-    constructor(x, y, speed, direction, gravity) {
+    constructor(x, y, speed, direction, grav) {
         this.x = x;
         this.y = y;
         this.vx = Math.cos(direction) * speed;
@@ -7,7 +7,7 @@ class Particle {
 
         this.gravity = grav || 0;
 
-        this.mass = mass || 1;
+        this.mass =  1;
         this.radius = 2;
         this.bounce = -1;
         this.friction = 1;

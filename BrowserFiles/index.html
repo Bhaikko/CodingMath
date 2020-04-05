@@ -5,19 +5,26 @@
     <style>
         html, body {
             margin: 0;
+            background-color: red;
         }
 
         canvas {
             display: block;
+            position: absolute;
+            top: 0px;
+            left: 0px;
         }
     </style>
     <script src="vector.js"></script>
     <script src="particle.js"></script>
-    <script src="CollisionDetection/utils.js"></script>
+    <script src="utils.js"></script>
 </head>
 <body>
     <canvas id="canvas">
-        
+
+    </canvas>
+    <canvas id="target">
+
     </canvas>
     <!-- <script src="trigo1.js"></script> -->
     <!-- <script src="trigo2.js"></script> -->
@@ -33,5 +40,6 @@
     <!-- <script src="CollisionDetection/circleCollision.js"></script> -->
     <!-- <script src="CollisionDetection/rectangleCollision.js"></script> -->
     <!-- <script src="Spring/spring1.js"></script> -->
+    <script src="CollisionDetection/bitmapCollision.js"></script>
 </body>
 </html>
